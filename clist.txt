@@ -1,0 +1,242 @@
+sw_checklist:*** KING AIR C90B *** PERFORMANCE LIMITS:PERFORMANCE
+sw_rcolsize:60
+sw_itemvoid:KING AIR C90B PERFORMANCE LIMITS
+sw_itemvoid:________________________________________________
+sw_itemvoid:MAX AIRSPEEED (VNE)	|225 KIAS
+sw_itemvoid:MAX CRUISE (VNO)		|208 KIAS
+sw_itemvoid:STALL SPEED (Clean)		| 89 KIAS
+sw_itemvoid:STALL SPEED (Landing)	| 76 KIAS
+#sw_itemvoid:MAX MANEUVERING SPEED (VA)|XXX
+sw_itemvoid:MAX W FLAPS APPROACH 	|184 KIAS
+sw_itemvoid:MAX W FLAPS DOWN		|148 KIAS
+sw_itemvoid:
+sw_itemvoid:FUEL CAPACITY (MAX)|384 GAL (2,573 LBS)
+#sw_itemvoid:FUEL CAPACITY (USEABLE)| XXX
+sw_itemvoid:FUEL BURN (avg.)| 92 GAL (617 LBS) / H
+#sw_itemvoid:ENDURANCE (8500 FT, 75% PWR, 53 GAL)|4.2 HRS
+#sw_itemvoid:RANGE (8500 FT, 75% PWR, 53 GAL)|518 NM
+#sw_itemvoid:MAX ENDURANCE (10000 FT, 45% PWR, 53 GAL)|6.7 HRS
+#sw_itemvoid:MAX RANGE (10000 FT, 45% PWR, 53 GAL)|638 NM
+sw_itemvoid:
+sw_itemvoid:MAX TAKEOFF WEIGHT|9,670 LBS (4,377 KG)
+sw_itemvoid:EMPTY WEIGHT|5,765 LBS (2,615 KG) 
+sw_itemvoid:USEFUL LOAD|3,885 LBS (1,762 KG)
+sw_itemvoid:BAGGAGE CAPACITY|350 LBS (159 KG)
+sw_itemvoid:
+sw_itemvoid:SERVICE CEILING|21,800 FT
+sw_itemvoid:CLIMB RATE (SEA LEVEL)|1,955 FPM @ 9,650 LBS
+sw_itemvoid:
+#sw_itemvoid:TAKEOFF GROUND ROLL|960 FT
+#sw_itemvoid:TAKEOFF DISTANCE OVER 50 FT OBSTACLE|1,630 FT
+#sw_itemvoid:LANDING GROUND ROLL|575 FT
+#sw_itemvoid:LANDING DISTANCE OVER 50 FT OBSTACLE|1,335 FT
+#sw_itemvoid:MAX CROSSWIND TAKEOFF/LANDING|15 KNOTS
+sw_itemvoid:
+sw_item:King Air C90B PERFORMANCE LIMITS|ACKNOWLEDGED
+sw_itemvoid:________________________________________________
+
+sw_checklist:BEFORE ENGINE STARTUP:BEFORE ENGINE STARTUP
+sw_rcolsize:60
+sw_remark:STARTING ENGINE CHECKLIST
+sw_itemvoid:________________________________________________
+sw_item:LANDING GEAR LEVER	|DOWN	:sim/cockpit/switches/gear_handle_status:1
+sw_item:PARKING BRAKE		|ON		:sim/flightmodel/controls/parkbrake:1
+sw_item:THROTTLE			|IDLE	:(sim/flightmodel/engine/ENGN_thro[0]:=0)&&(sim/flightmodel/engine/ENGN_thro[1]:=0)
+sw_item:PROPS				|FULL F.:(sim/cockpit2/engine/actuators/prop_rotation_speed_rad_sec[0]:>228)&&(sim/cockpit2/engine/actuators/prop_rotation_speed_rad_sec[1]:>228)
+sw_item:CONDITION LEVERS	|CUTOFF	:(sim/cockpit2/engine/actuators/mixture_ratio[0]:=0)&&(sim/cockpit2/engine/actuators/mixture_ratio[1]:=0)
+sw_item:BLEED AIR			|OPEN	:sim/cockpit2/pressurization/actuators/bleed_air_mode:=2
+sw_itemvoid:(bleed air on FO side left below yoke)
+sw_item:BOOST PUMPS			|ON		:(sim/cockpit2/engine/actuators/fuel_pump_on[0]:1)&&(sim/cockpit2/engine/actuators/fuel_pump_on[1]:1)
+sw_itemvoid:(boost pump switches on left side under window)
+sw_item:BATTERY				|ON		:sim/cockpit/electrical/battery_on:1
+sw_item:BEACON LIGHT		|ON		:sim/cockpit/electrical/beacon_lights_on:1
+sw_continue:RIGHT ENGINE START
+
+sw_checklist:RIGHT ENGINE START:RIGHT
+sw_rcolsize:60
+sw_remark:RIGHT ENGINE STARTUP
+sw_itemvoid:________________________________________________
+sw_item:IGNITION RIGHT		|ON		:(sim/cockpit/warnings/annunciators/auto_ignition:=2)||(sim/cockpit/warnings/annunciators/auto_ignition:=3)
+sw_itemvoid:(switch UP, if you put the switch DOWN it just motors the engines without the igniters)
+sw_itemvoid:CHECK R IGN ANNUNCIATOR LIGHT
+sw_item:CHECK R OIL PRESSURE RISING	:sim/flightmodel/engine/ENGN_oil_press_psi[1]:>=20
+sw_item:CHECK R TURBINE RPM > 12%	:sim/flightmodel2/engines/N1_percent[1]:>=10
+sw_item:R CONDITION LEVER 	|LOW IDLE:sim/cockpit2/engine/actuators/mixture_ratio[1]:0.25|0.4
+sw_item:CHECK R TURBINE RPM > 51%	:sim/flightmodel2/engines/N1_percent[1]:>=50
+sw_item:R START SWITCH 		|OFF	:(sim/cockpit/warnings/annunciators/auto_ignition:=0)||(sim/cockpit/warnings/annunciators/auto_ignition:=1)
+sw_item:R CONDITION LEVER 	|HI IDLE:sim/cockpit2/engine/actuators/mixture_ratio[1]:1
+sw_item:R GENERATOR HOLD RESET 2s
+sw_item:VERIFY R GEN ANN. OFF		:sim/cockpit2/annunciators/generator_off[1]:!1
+sw_item:VERIFY R GENERATOR LOAD GAUGE <50%
+sw_itemvoid:(generator load gauge overhead)
+sw_continue:LEFT ENGINE START
+
+sw_checklist:LEFT ENGINE START
+sw_rcolsize:60
+sw_remark:LEFT ENGINE STARTUP
+sw_itemvoid:________________________________________________
+sw_item:IGNITION LEFT		|ON		:(sim/cockpit/warnings/annunciators/auto_ignition:=1)||(sim/cockpit/warnings/annunciators/auto_ignition:=3)
+sw_itemvoid:CHECK L IGN ANNUNCIATOR LIGHT
+sw_item:CHECK L OIL PRESSURE RISING	:sim/flightmodel/engine/ENGN_oil_press_psi[0]:>=20
+sw_item:CHECK L TURBINE RPM > 12%	:sim/flightmodel2/engines/N1_percent[0]:>=10
+sw_item:L CONDITION LEVER |LOW IDLE	:sim/cockpit2/engine/actuators/mixture_ratio[0]:0.25|0.4
+sw_item:CHECK L TURBINE RPM > 51%	:sim/flightmodel2/engines/N1_percent[0]:>=50
+sw_item:L START SWITCH 		|OFF	:(sim/cockpit/warnings/annunciators/auto_ignition:=0)||(sim/cockpit/warnings/annunciators/auto_ignition:=2)
+sw_item:L CONDITION LEVER 	|HI IDLE:sim/cockpit2/engine/actuators/mixture_ratio[0]:1
+sw_item:L GENERATOR HOLD RESET 2s
+sw_item:VERIFY L GEN ANN. OFF		:sim/cockpit2/annunciators/generator_off[0]:!1
+sw_item:VERIFY L GENERATOR LOAD GAUGE <50%
+sw_continue:AFTER ENGINE START
+
+sw_checklist:AFTER ENGINE START
+sw_rcolsize:60
+sw_remark:AFTER ENGINE START
+sw_itemvoid:________________________________________________
+sw_item:CONDITION LEVERS	|LOW IDLE:(sim/cockpit2/engine/actuators/mixture_ratio[0]:0.25|0.4)&&(sim/cockpit2/engine/actuators/mixture_ratio[0]:0.25|0.4)
+sw_item:TRANSFER PUMPS		|AUTO	:(sim/cockpit2/fuel/transfer_pump_left:1)&&(sim/cockpit2/fuel/transfer_pump_right:1)
+sw_itemvoid:(transfer pump switches on right side below window)
+sw_item:BOOST PUMPS			|VERIFY	:(sim/cockpit2/engine/actuators/fuel_pump_on[0]:1)&&(sim/cockpit2/engine/actuators/fuel_pump_on[1]:1)
+sw_item:CROSSFEED			|AUTO	:sim/cockpit2/fuel/auto_crossfeed:1
+sw_item:INVERTER #1 or #2			:(sim/cockpit2/electrical/inverter_on[0]:=1)||(sim/cockpit2/electrical/inverter_on[1]:=1)
+sw_itemvoid:(we alternate which one for each flight)
+sw_item:ENGINE START		|COMPLETE
+sw_continue:BEFORE TAXI
+
+sw_checklist:BEFORE TAXI:BEFORE TAXI
+sw_rcolsize:60
+sw_remark:BEFORE TAXI
+sw_itemvoid:________________________________________________
+sw_item:EFIS POWER			|ON		:laminar/c90/avionics/switch_pos/EFIS_power:1
+sw_itemvoid:(switch on center console)
+sw_item:ELEVATOR TRIM		|ON		:laminar/c90/fltctrl/switch_pos/elev_trim_control:1
+sw_itemvoid:(small switch on center console)
+sw_itemvoid:(needed for AP and trimming)
+sw_item:EFIS AUX POWER		|ON		:laminar/c90/avionics/EFIS/switch_pos/aux_pwr_on:1
+sw_itemvoid:(tiny toggle switch on left side of the Captain’s panel)
+sw_item:AVIONICS MASTER		|ON		:sim/cockpit/electrical/avionics_on:1
+sw_item:ALTIMETERS			|SET
+sw_item:ANNUNCIATOR LIGHTS	|CHECK and RESET
+sw_item:TRANSPONDER			|ALT	:sim/cockpit/radios/transponder_mode:=3
+#sw_item:INSTRUMENT VACUUM	|CHECK	:sim/cockpit/misc/vacuum:{sim/aircraft/limits/green_lo_vac}|{sim/aircraft/limits/green_hi_vac}
+sw_itemvoid:INSTRUMENT VACUUM (not modelled)
+sw_itemvoid:(gauges on the far right panel)
+sw_item:FLIGHT CONTROLS		|FREE & CORRECT
+sw_item:PARK BRAKE			|RELEASE:sim/flightmodel/controls/parkbrake:0
+
+sw_checklist:BEFORE TAKEOFF:BEFORE TAKEOFF
+sw_rcolsize:60
+sw_remark:BEFORE TAKEOFF
+sw_itemvoid:________________________________________________
+sw_item:AUTO IGNITION		|ARMED	:(sim/cockpit2/engine/actuators/auto_ignite_on[0]:1)&&(sim/cockpit2/engine/actuators/auto_ignite_on[1]:1)
+sw_item:ENGINE ANTI-ICE		|IF REQUIRED
+sw_item:AUTOFEATHER			|ARMED	:sim/cockpit/switches/auto_feather_mode:1
+sw_item:ELEVATOR TRIM		|3 UP	:sim/cockpit2/controls/elevator_trim:0.13|0.17
+sw_item:AILERON TRIM		|ZERO	:sim/cockpit2/controls/aileron_trim:-0.01|0.01
+sw_item:RUDDER TRIM			|ZERO	:sim/cockpit2/controls/rudder_trim:-0.01|0.01
+sw_item:FLAPS				|UP		:sim/cockpit2/controls/flap_ratio:=0
+sw_item:TAKEOFF BRIEF		|COMPLETE
+sw_item:LIGHTS AND STROBES	|ON		:sim/cockpit/electrical/strobe_lights_on:1
+sw_itemvoid:ICE PROTECTION
+sw_item:WINDSHIELD			|IF REQUIRED
+sw_item:PROP				|IF REQUIRED
+sw_item:STALL WARNING HEATER|ON		:sim/cockpit/switches/anti_ice_AOA_heat:1
+sw_item:L & R PITOT HEAT	|ON		:(sim/cockpit/switches/pitot_heat_on:1)&&(sim/cockpit/switches/pitot_heat_on2:1)
+sw_item:L & R FUEL VENT HEAT|ON		:(laminar/c90/iceRain/switch/fuelvent_deice_pos_L:1)&&(laminar/c90/iceRain/switch/fuelvent_deice_pos_R:1)
+sw_item:PRE TAKEOFF CHECKLIST|COMPLETE
+sw_continue:TAKEOFF
+
+sw_checklist:TAKEOFF:TAKEOFF
+sw_rcolsize:60
+sw_item:POWER LEVERS		|1200-1300 FT-LBS
+sw_item:ENSURE ITT BELOW 695 DEG
+sw_itemvoid:DECISION SPEED	|80 KIAS
+sw_itemvoid:ROTATE			|95 KIAS
+
+
+sw_checklist:AFTER TAKEOFF:AFTER TAKEOFF
+sw_rcolsize:60
+sw_item:OBSERVE POS RATE OF CLIMB	:sim/flightmodel/position/vh_ind:>2.5
+sw_item:GEAR UP (<163 KIAS)			:sim/cockpit/switches/gear_handle_status:0
+sw_item:PITCH FOR 120 KIAS
+sw_item:LANDING LIGHTS		|OFF	:(sim/cockpit2/switches/landing_lights_switch[0]:0)&&(sim/cockpit2/switches/landing_lights_switch[1]:0)
+sw_item:YAW DAMPER			|ON		:sim/cockpit/switches/yaw_damper_on:1
+sw_item:PROP SYNC			|ON		:sim/cockpit/switches/prop_sync_on:1
+sw_item:AT 1,000 FT REDUCE POWER TO 1,100 FT-LBS
+sw_item:PROPS BACK to 2,000 RPM
+sw_item:POWER TO 1,200 FT-LBS
+sw_item:PITCH FOR 140 KIAS
+sw_item:VERIFY GEAR UP:(sim/flightmodel2/gear/deploy_ratio[0]:0)&&(sim/flightmodel2/gear/deploy_ratio[1]:0)&&(sim/flightmodel2/gear/deploy_ratio[2]:0)
+sw_item:VERIFY PRESSURIZATION
+
+
+sw_checklist:CRUISE:CRUISE
+sw_rcolsize:60
+sw_item:POWER LEVELS		|250 LBS/H
+sw_item:PROPS				|1,900 RPM
+sw_item:AUTOFEATHER|OFF
+sw_item:PRESSURIZATION
+sw_item:FUEL SUFFICIENT
+
+
+
+
+sw_checklist:DESCENT/APPROACH:DESCENT
+sw_rcolsize:60
+sw_item:ALTIMETERS			|SET
+sw_item:PRESSURIZATION		|SET
+sw_itemvoid:(controller should be set to 500 feet above the field elevation of your destination airport)
+sw_item:AUTOFEATHER			|ARMED	:sim/cockpit/switches/auto_feather_mode:1
+sw_item:APPROACH BRIEF		|COMPLETE
+sw_item:RECOG LIGHTS		|ON		:sim/cockpit2/switches/generic_lights_switch[2]:1
+
+
+sw_checklist:LANDING:LANDING
+sw_rcolsize:60
+sw_item:FLAPS (<184 KIAS)	|APPROACH:sim/cockpit2/controls/flap_ratio:0.2|0.8
+sw_item:GEAR (<184 KIAS)	|DOWN	:sim/cockpit/switches/gear_handle_status:1
+sw_item:LANDING LIGHTS		|ON:(sim/cockpit2/switches/landing_lights_switch[0]:1)&&(sim/cockpit2/switches/landing_lights_switch[1]:1)
+sw_item:YAW DAMPER			|OFF:sim/cockpit/switches/yaw_damper_on:0
+sw_item:FLAPS (<148 KIAS)	|FULL	:sim/cockpit2/controls/flap_ratio:=1
+sw_item:APPROACH SPEED 100-120 KIAS
+sw_itemvoid:The airplane slows very quickly with power at idle. 
+sw_itemvoid:Don't pull power back to idle until you're starting the roundout and flare. 
+#7. If Reverse is used, the power levers need to be set back to Ground Fine (Beta) or Idle before slowing below 40 KIAS to prevent damage to the propellers from dirt or debris on the runway.
+
+
+
+sw_checklist:AFTER LANDING:AFTER LANDING
+sw_rcolsize:60
+sw_item:AUTO IGNITION		|OFF	:(sim/cockpit2/engine/actuators/auto_ignite_on[0]:0)&&(sim/cockpit2/engine/actuators/auto_ignite_on[1]:0)
+sw_item:ENGINE ANTI-ICE		|ON		:(sim/cockpit2/ice/anti_ice_engine_air[0]:=1)&&(sim/cockpit2/ice/anti_ice_engine_air[1]:=1)
+sw_item:AUTOFEATHER			|OFF	:sim/cockpit/switches/auto_feather_mode:0
+sw_item:PROP SYNC			|OFF	:sim/cockpit/switches/prop_sync_on:0
+sw_item:FUEL VENT ICE PROT	|OFF	:(laminar/c90/iceRain/switch/fuelvent_deice_pos_L:0)&&(laminar/c90/iceRain/switch/fuelvent_deice_pos_R:0)
+sw_item:PITOT ICE PROT		|OFF	:(sim/cockpit/switches/pitot_heat_on:0)&&(sim/cockpit/switches/pitot_heat_on2:0)
+sw_item:STALL ICE PROT		|OFF	:sim/cockpit/switches/anti_ice_AOA_heat:0
+sw_item:RECOG LIGHTS		|OFF	:sim/cockpit2/switches/generic_lights_switch[2]:0
+sw_item:TRIMS				|SET
+sw_item:FLAPS				|UP		:sim/cockpit2/controls/flap_ratio:=0
+sw_item:TRANSPONDER			|STBY	:sim/cockpit/radios/transponder_mode:=1
+sw_item:CONDITION LEVERS	|AS REQUIRED
+sw_itemvoid:(Low Idle is easier for controlling taxi speed as long as the ITT and Generator Load gauges stay in limits)
+
+
+sw_checklist:SHUTDOWN:SHUTDOWN
+sw_rcolsize:60
+sw_item:PARKING BRAKE		|SET	:sim/flightmodel/controls/parkbrake:1
+sw_item:TRANSFER PUMPS		|OFF	:(sim/cockpit2/fuel/transfer_pump_left:0)&&(sim/cockpit2/fuel/transfer_pump_right:0)
+sw_item:CROSSFEED			|OFF	:sim/cockpit2/fuel/auto_crossfeed:0
+sw_item:EFIS PWR/AUX PWR	|OFF	:(laminar/c90/avionics/switch_pos/EFIS_power:0)&&(laminar/c90/avionics/EFIS/switch_pos/aux_pwr_on:0)
+sw_item:ELEVATOR TRIM		|OFF	:laminar/c90/fltctrl/switch_pos/elev_trim_control:0
+sw_item:AVIONICS MASTER		|OFF	:sim/cockpit/electrical/avionics_on:0
+sw_item:INVERTER			|OFF	:(sim/cockpit2/electrical/inverter_on[0]:=0)&&(sim/cockpit2/electrical/inverter_on[1]:=0)
+sw_item:CABIN MODE CONTROL	|OFF/AUTO
+sw_item:POWER LEVERS		|IDLE	:(sim/flightmodel/engine/ENGN_thro[0]:=0)&&(sim/flightmodel/engine/ENGN_thro[1]:=0)
+sw_item:PROP CONTROL		|FEATHER:(sim/cockpit2/engine/actuators/prop_rotation_speed_rad_sec[0]:<=105)&&(sim/cockpit2/engine/actuators/prop_rotation_speed_rad_sec[1]:<=105)
+sw_item:CONDITION LEVERS	|CUTOFF	:(sim/cockpit2/engine/actuators/mixture_ratio[0]:=0)&&(sim/cockpit2/engine/actuators/mixture_ratio[1]:=0)
+sw_item:LIGHTS				|OFF	:(sim/cockpit/electrical/beacon_lights_on:0)
+sw_item:WAIT FOR TURBINE RPM <10%	:(sim/flightmodel2/engines/N1_percent[0]:<10)&&(sim/flightmodel2/engines/N1_percent[1]:<10)
+sw_item:BOOST PUMPS			|OFF	:(sim/cockpit2/engine/actuators/fuel_pump_on[0]:0)&&(sim/cockpit2/engine/actuators/fuel_pump_on[1]:0)
+sw_item:BLEED AIR VALVES	|CLOSED	:sim/cockpit2/pressurization/actuators/bleed_air_mode:0
+sw_item:ENGINE ANTI-ICE		|OFF	:(sim/cockpit2/ice/anti_ice_engine_air[0]:=1)&&(sim/cockpit2/ice/anti_ice_engine_air[1]:=1)
+sw_item:BATTERY				|OFF	:sim/cockpit/electrical/battery_on:0
