@@ -129,7 +129,7 @@ sw_remark:BEFORE TAKEOFF
 sw_itemvoid:________________________________________________
 sw_item:AUTO IGNITION		|ARMED	:(sim/cockpit2/engine/actuators/auto_ignite_on[0]:1)&&(sim/cockpit2/engine/actuators/auto_ignite_on[1]:1)
 sw_item:ENGINE ANTI-ICE		|IF REQUIRED
-sw_item:AUTOFEATHER			|ARMED	:sim/cockpit/switches/auto_feather_mode:1
+sw_item:AUTOFEATHER			|ARMED	:sim/cockpit2/switches/prop_feather_mode:1
 sw_item:ELEVATOR TRIM		|3 UP	:sim/cockpit2/controls/elevator_trim:0.13|0.17
 sw_item:AILERON TRIM		|ZERO	:sim/cockpit2/controls/aileron_trim:-0.01|0.01
 sw_item:RUDDER TRIM			|ZERO	:sim/cockpit2/controls/rudder_trim:-0.01|0.01
@@ -173,7 +173,7 @@ sw_checklist:CRUISE:CRUISE
 sw_rcolsize:60
 sw_item:POWER LEVELS		|250 LBS/H
 sw_item:PROPS				|1,900 RPM
-sw_item:AUTOFEATHER|OFF
+sw_item:AUTOFEATHER			|OFF	:sim/cockpit2/switches/prop_feather_mode:0
 sw_item:PRESSURIZATION
 sw_item:FUEL SUFFICIENT
 
@@ -185,7 +185,7 @@ sw_rcolsize:60
 sw_item:ALTIMETERS			|SET
 sw_item:PRESSURIZATION		|SET
 sw_itemvoid:(controller should be set to 500 feet above the field elevation of your destination airport)
-sw_item:AUTOFEATHER			|ARMED	:sim/cockpit/switches/auto_feather_mode:1
+sw_item:AUTOFEATHER			|ARMED	:sim/cockpit2/switches/prop_feather_mode:1
 sw_item:APPROACH BRIEF		|COMPLETE
 sw_item:RECOG LIGHTS		|ON		:sim/cockpit2/switches/generic_lights_switch[2]:1
 
@@ -208,7 +208,7 @@ sw_checklist:AFTER LANDING:AFTER LANDING
 sw_rcolsize:60
 sw_item:AUTO IGNITION		|OFF	:(sim/cockpit2/engine/actuators/auto_ignite_on[0]:0)&&(sim/cockpit2/engine/actuators/auto_ignite_on[1]:0)
 sw_item:ENGINE ANTI-ICE		|ON		:(sim/cockpit2/ice/anti_ice_engine_air[0]:=1)&&(sim/cockpit2/ice/anti_ice_engine_air[1]:=1)
-sw_item:AUTOFEATHER			|OFF	:sim/cockpit/switches/auto_feather_mode:0
+sw_item:AUTOFEATHER			|ARMED	:sim/cockpit2/switches/prop_feather_mode:0
 sw_item:PROP SYNC			|OFF	:sim/cockpit/switches/prop_sync_on:0
 sw_item:FUEL VENT ICE PROT	|OFF	:(laminar/c90/iceRain/switch/fuelvent_deice_pos_L:0)&&(laminar/c90/iceRain/switch/fuelvent_deice_pos_R:0)
 sw_item:PITOT ICE PROT		|OFF	:(sim/cockpit/switches/pitot_heat_on:0)&&(sim/cockpit/switches/pitot_heat_on2:0)
