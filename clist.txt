@@ -238,5 +238,5 @@ sw_item:LIGHTS				|OFF	:(sim/cockpit/electrical/beacon_lights_on:0)
 sw_item:WAIT FOR TURBINE RPM <10%	:(sim/flightmodel2/engines/N1_percent[0]:<10)&&(sim/flightmodel2/engines/N1_percent[1]:<10)
 sw_item:BOOST PUMPS			|OFF	:(sim/cockpit2/engine/actuators/fuel_pump_on[0]:0)&&(sim/cockpit2/engine/actuators/fuel_pump_on[1]:0)
 sw_item:BLEED AIR VALVES	|CLOSED	:sim/cockpit2/pressurization/actuators/bleed_air_mode:0
-sw_item:ENGINE ANTI-ICE		|OFF	:(sim/cockpit2/ice/anti_ice_engine_air[0]:=1)&&(sim/cockpit2/ice/anti_ice_engine_air[1]:=1)
+sw_item:ENGINE ANTI-ICE		|OFF	:(sim/cockpit2/ice/anti_ice_engine_air[0]:=0)&&(sim/cockpit2/ice/anti_ice_engine_air[1]:=0)
 sw_item:BATTERY				|OFF	:sim/cockpit/electrical/battery_on:0
