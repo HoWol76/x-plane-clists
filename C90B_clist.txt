@@ -1,5 +1,4 @@
 sw_checklist:*** KING AIR C90B *** PERFORMANCE LIMITS:PERFORMANCE
-sw_rcolsize:60
 sw_itemvoid:KING AIR C90B PERFORMANCE LIMITS
 sw_itemvoid:________________________________________________
 sw_itemvoid:MAX AIRSPEEED (VNE)	|225 KIAS
@@ -35,8 +34,8 @@ sw_itemvoid:
 sw_item:King Air C90B PERFORMANCE LIMITS|ACKNOWLEDGED
 sw_itemvoid:________________________________________________
 
+
 sw_checklist:BEFORE ENGINE STARTUP:BEFORE ENGINE STARTUP
-sw_rcolsize:60
 sw_remark:STARTING ENGINE CHECKLIST
 sw_itemvoid:________________________________________________
 sw_item:LANDING GEAR LEVER	|DOWN	:sim/cockpit/switches/gear_handle_status:1
@@ -52,8 +51,8 @@ sw_item:BATTERY				|ON		:sim/cockpit/electrical/battery_on:1
 sw_item:BEACON LIGHT		|ON		:sim/cockpit/electrical/beacon_lights_on:1
 sw_continue:RIGHT ENGINE START
 
+
 sw_checklist:RIGHT ENGINE START:RIGHT
-sw_rcolsize:60
 sw_remark:RIGHT ENGINE STARTUP
 sw_itemvoid:________________________________________________
 sw_item:IGNITION RIGHT		|ON		:laminar/c90/powerplant/switch/ign_start_pos_R:1
@@ -71,8 +70,8 @@ sw_item:VERIFY R GENERATOR LOAD GAUGE <50%
 sw_itemvoid:(generator load gauge overhead)
 sw_continue:LEFT ENGINE START
 
+
 sw_checklist:LEFT ENGINE START
-sw_rcolsize:60
 sw_remark:LEFT ENGINE STARTUP
 sw_itemvoid:________________________________________________
 sw_item:IGNITION LEFT		|ON		:laminar/c90/powerplant/switch/ign_start_pos_L:1
@@ -88,8 +87,8 @@ sw_item:VERIFY L GEN ANN. OFF		:sim/cockpit2/annunciators/generator_off[0]:!1
 sw_item:VERIFY L GENERATOR LOAD GAUGE <50%
 sw_continue:AFTER ENGINE START
 
+
 sw_checklist:AFTER ENGINE START
-sw_rcolsize:60
 sw_remark:AFTER ENGINE START
 sw_itemvoid:________________________________________________
 sw_item:CONDITION LEVERS	|LOW IDLE:(sim/cockpit2/engine/actuators/mixture_ratio[0]:0.25|0.4)&&(sim/cockpit2/engine/actuators/mixture_ratio[0]:0.25|0.4)
@@ -102,8 +101,8 @@ sw_itemvoid:(we alternate which one for each flight)
 sw_item:ENGINE START		|COMPLETE
 sw_continue:BEFORE TAXI
 
+
 sw_checklist:BEFORE TAXI:BEFORE TAXI
-sw_rcolsize:60
 sw_remark:BEFORE TAXI
 sw_itemvoid:________________________________________________
 sw_item:EFIS POWER			|ON		:laminar/c90/avionics/switch_pos/EFIS_power:1
@@ -123,8 +122,8 @@ sw_itemvoid:(gauges on the far right panel)
 sw_item:FLIGHT CONTROLS		|FREE & CORRECT
 sw_item:PARK BRAKE			|RELEASE:sim/flightmodel/controls/parkbrake:0
 
+
 sw_checklist:BEFORE TAKEOFF:BEFORE TAKEOFF
-sw_rcolsize:60
 sw_remark:BEFORE TAKEOFF
 sw_itemvoid:________________________________________________
 sw_item:AUTO IGNITION		|ARMED	:(sim/cockpit2/engine/actuators/auto_ignite_on[0]:1)&&(sim/cockpit2/engine/actuators/auto_ignite_on[1]:1)
@@ -145,8 +144,8 @@ sw_item:L & R FUEL VENT HEAT|ON		:(laminar/c90/iceRain/switch/fuelvent_deice_pos
 sw_item:PRE TAKEOFF CHECKLIST|COMPLETE
 sw_continue:TAKEOFF
 
+
 sw_checklist:TAKEOFF:TAKEOFF
-sw_rcolsize:60
 sw_item:POWER LEVERS		|1200-1300 FT-LBS
 sw_item:ENSURE ITT BELOW 695 DEG
 sw_itemvoid:DECISION SPEED	|80 KIAS
@@ -154,7 +153,7 @@ sw_itemvoid:ROTATE			|95 KIAS
 
 
 sw_checklist:AFTER TAKEOFF:AFTER TAKEOFF
-sw_rcolsize:60
+sw_show:sim/flightmodel/position/y_agl:90:110
 sw_item:OBSERVE POS RATE OF CLIMB	:sim/flightmodel/position/vh_ind:>2.5
 sw_item:GEAR UP (<163 KIAS)			:sim/cockpit/switches/gear_handle_status:0
 sw_item:PITCH FOR 120 KIAS
@@ -170,7 +169,6 @@ sw_item:VERIFY PRESSURIZATION
 
 
 sw_checklist:CRUISE:CRUISE
-sw_rcolsize:60
 sw_item:POWER LEVELS		|250 LBS/H
 sw_item:PROPS				|1,900 RPM
 sw_item:AUTOFEATHER			|OFF	:sim/cockpit2/switches/prop_feather_mode:0
@@ -178,10 +176,7 @@ sw_item:PRESSURIZATION
 sw_item:FUEL SUFFICIENT
 
 
-
-
-sw_checklist:DESCENT/APPROACH:DESCENT
-sw_rcolsize:60
+sw_checklist:DESCENT:DESCENT
 sw_item:ALTIMETERS			|SET
 sw_item:PRESSURIZATION		|SET
 sw_itemvoid:(controller should be set to 500 feet above the field elevation of your destination airport)
@@ -191,7 +186,7 @@ sw_item:RECOG LIGHTS		|ON		:sim/cockpit2/switches/generic_lights_switch[2]:1
 
 
 sw_checklist:LANDING:LANDING
-sw_rcolsize:60
+sw_show:sim/flightmodel/position/y_agl:500:450
 sw_item:FLAPS (<184 KIAS)	|APPROACH:sim/cockpit2/controls/flap_ratio:0.2|0.8
 sw_item:GEAR (<184 KIAS)	|DOWN	:sim/cockpit/switches/gear_handle_status:1
 sw_item:LANDING LIGHTS		|ON		:(sim/cockpit2/switches/landing_lights_switch[0]:1)&&(sim/cockpit2/switches/landing_lights_switch[1]:1)
@@ -205,7 +200,7 @@ sw_itemvoid:Don't pull power back to idle until you're starting the roundout and
 
 
 sw_checklist:AFTER LANDING:AFTER LANDING
-sw_rcolsize:60
+sw_show:(sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot:<2)&&(sim/flightmodel/position/groundspeed:30:25)
 sw_item:AUTO IGNITION		|OFF	:(sim/cockpit2/engine/actuators/auto_ignite_on[0]:0)&&(sim/cockpit2/engine/actuators/auto_ignite_on[1]:0)
 sw_item:ENGINE ANTI-ICE		|ON		:(sim/cockpit2/ice/anti_ice_engine_air[0]:=1)&&(sim/cockpit2/ice/anti_ice_engine_air[1]:=1)
 sw_item:AUTOFEATHER			|ARMED	:sim/cockpit2/switches/prop_feather_mode:0
@@ -224,7 +219,6 @@ sw_itemvoid:(Low Idle is easier for controlling taxi speed as long as the ITT an
 
 
 sw_checklist:SHUTDOWN:SHUTDOWN
-sw_rcolsize:60
 sw_item:PARKING BRAKE		|SET	:sim/flightmodel/controls/parkbrake:1
 sw_item:TRANSFER PUMPS		|OFF	:(sim/cockpit2/fuel/transfer_pump_left:0)&&(sim/cockpit2/fuel/transfer_pump_right:0)
 sw_item:CROSSFEED			|OFF	:sim/cockpit2/fuel/auto_crossfeed:0
