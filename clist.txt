@@ -10,23 +10,23 @@ sw_itemvoid:STALL SPEED (Landing)	| 76 KIAS
 sw_itemvoid:MAX W FLAPS APPROACH 	|184 KIAS
 sw_itemvoid:MAX W FLAPS DOWN		|148 KIAS
 sw_itemvoid:
-sw_itemvoid:FUEL CAPACITY (MAX)|384 GAL (2,573 LBS)
+sw_itemvoid:FUEL CAPACITY (MAX)		|384 GAL (2,573 LBS)
 #sw_itemvoid:FUEL CAPACITY (USEABLE)| XXX
-sw_itemvoid:FUEL BURN (avg.)| 92 GAL (617 LBS) / H
+sw_itemvoid:FUEL BURN (avg.)		| 92 GAL (617 LBS) / H
 #sw_itemvoid:ENDURANCE (8500 FT, 75% PWR, 53 GAL)|4.2 HRS
 #sw_itemvoid:RANGE (8500 FT, 75% PWR, 53 GAL)|518 NM
 #sw_itemvoid:MAX ENDURANCE (10000 FT, 45% PWR, 53 GAL)|6.7 HRS
 #sw_itemvoid:MAX RANGE (10000 FT, 45% PWR, 53 GAL)|638 NM
 sw_itemvoid:
-sw_itemvoid:MAX TAKEOFF WEIGHT|9,670 LBS (4,377 KG)
-sw_itemvoid:EMPTY WEIGHT|5,765 LBS (2,615 KG) 
-sw_itemvoid:USEFUL LOAD|3,885 LBS (1,762 KG)
-sw_itemvoid:BAGGAGE CAPACITY|350 LBS (159 KG)
+sw_itemvoid:MAX TAKEOFF WEIGHT		|9,670 LBS (4,377 KG)
+sw_itemvoid:EMPTY WEIGHT			|5,765 LBS (2,615 KG) 
+sw_itemvoid:USEFUL LOAD				|3,885 LBS (1,762 KG)
+sw_itemvoid:BAGGAGE CAPACITY		|350 LBS (159 KG)
 sw_itemvoid:
-sw_itemvoid:SERVICE CEILING|21,800 FT
-sw_itemvoid:CLIMB RATE (SEA LEVEL)|1,955 FPM @ 9,650 LBS
+sw_itemvoid:SERVICE CEILING			|21,800 FT
+sw_itemvoid:CLIMB RATE (SEA LEVEL)	|1,955 FPM @ 9,650 LBS
 sw_itemvoid:
-#sw_itemvoid:TAKEOFF GROUND ROLL|960 FT
+#sw_itemvoid:TAKEOFF GROUND ROLL	|960 FT
 #sw_itemvoid:TAKEOFF DISTANCE OVER 50 FT OBSTACLE|1,630 FT
 #sw_itemvoid:LANDING GROUND ROLL|575 FT
 #sw_itemvoid:LANDING DISTANCE OVER 50 FT OBSTACLE|1,335 FT
@@ -56,16 +56,16 @@ sw_checklist:RIGHT ENGINE START:RIGHT
 sw_rcolsize:60
 sw_remark:RIGHT ENGINE STARTUP
 sw_itemvoid:________________________________________________
-sw_item:IGNITION RIGHT		|ON		:(sim/cockpit/warnings/annunciators/auto_ignition:=2)||(sim/cockpit/warnings/annunciators/auto_ignition:=3)
+sw_item:IGNITION RIGHT		|ON		:laminar/c90/powerplant/switch/ign_start_pos_R:1
+sw_item:R IGN ANNUNCIATOR 			:(sim/cockpit/warnings/annunciators/auto_ignition:=2)||(sim/cockpit/warnings/annunciators/auto_ignition:=3)
 sw_itemvoid:(switch UP, if you put the switch DOWN it just motors the engines without the igniters)
-sw_itemvoid:CHECK R IGN ANNUNCIATOR LIGHT
 sw_item:CHECK R OIL PRESSURE RISING	:sim/flightmodel/engine/ENGN_oil_press_psi[1]:>=20
 sw_item:CHECK R TURBINE RPM > 12%	:sim/flightmodel2/engines/N1_percent[1]:>=10
 sw_item:R CONDITION LEVER 	|LOW IDLE:sim/cockpit2/engine/actuators/mixture_ratio[1]:0.25|0.4
 sw_item:CHECK R TURBINE RPM > 51%	:sim/flightmodel2/engines/N1_percent[1]:>=50
-sw_item:R START SWITCH 		|OFF	:(sim/cockpit/warnings/annunciators/auto_ignition:=0)||(sim/cockpit/warnings/annunciators/auto_ignition:=1)
+sw_item:IGNITION RIGHT		|OFF	:laminar/c90/powerplant/switch/ign_start_pos_R:0
 sw_item:R CONDITION LEVER 	|HI IDLE:sim/cockpit2/engine/actuators/mixture_ratio[1]:1
-sw_item:R GENERATOR HOLD RESET 2s
+sw_item:GENERATOR 2 HOLD 2S |RESET  :laminar/c90/electrical/switch/gen2_switch_pos:1
 sw_item:VERIFY R GEN ANN. OFF		:sim/cockpit2/annunciators/generator_off[1]:!1
 sw_item:VERIFY R GENERATOR LOAD GAUGE <50%
 sw_itemvoid:(generator load gauge overhead)
@@ -75,15 +75,15 @@ sw_checklist:LEFT ENGINE START
 sw_rcolsize:60
 sw_remark:LEFT ENGINE STARTUP
 sw_itemvoid:________________________________________________
-sw_item:IGNITION LEFT		|ON		:(sim/cockpit/warnings/annunciators/auto_ignition:=1)||(sim/cockpit/warnings/annunciators/auto_ignition:=3)
-sw_itemvoid:CHECK L IGN ANNUNCIATOR LIGHT
+sw_item:IGNITION LEFT		|ON		:laminar/c90/powerplant/switch/ign_start_pos_L:1
+sw_item:L IGN ANNUNCIATOR 			:(sim/cockpit/warnings/annunciators/auto_ignition:=1)||(sim/cockpit/warnings/annunciators/auto_ignition:=3)
 sw_item:CHECK L OIL PRESSURE RISING	:sim/flightmodel/engine/ENGN_oil_press_psi[0]:>=20
 sw_item:CHECK L TURBINE RPM > 12%	:sim/flightmodel2/engines/N1_percent[0]:>=10
 sw_item:L CONDITION LEVER |LOW IDLE	:sim/cockpit2/engine/actuators/mixture_ratio[0]:0.25|0.4
 sw_item:CHECK L TURBINE RPM > 51%	:sim/flightmodel2/engines/N1_percent[0]:>=50
-sw_item:L START SWITCH 		|OFF	:(sim/cockpit/warnings/annunciators/auto_ignition:=0)||(sim/cockpit/warnings/annunciators/auto_ignition:=2)
+sw_item:IGNITION LEFT		|OFF	:laminar/c90/powerplant/switch/ign_start_pos_L:0
 sw_item:L CONDITION LEVER 	|HI IDLE:sim/cockpit2/engine/actuators/mixture_ratio[0]:1
-sw_item:L GENERATOR HOLD RESET 2s
+sw_item:GENERATOR 1 HOLD 2S |RESET  :laminar/c90/electrical/switch/gen1_switch_pos:1
 sw_item:VERIFY L GEN ANN. OFF		:sim/cockpit2/annunciators/generator_off[0]:!1
 sw_item:VERIFY L GENERATOR LOAD GAUGE <50%
 sw_continue:AFTER ENGINE START
@@ -194,8 +194,8 @@ sw_checklist:LANDING:LANDING
 sw_rcolsize:60
 sw_item:FLAPS (<184 KIAS)	|APPROACH:sim/cockpit2/controls/flap_ratio:0.2|0.8
 sw_item:GEAR (<184 KIAS)	|DOWN	:sim/cockpit/switches/gear_handle_status:1
-sw_item:LANDING LIGHTS		|ON:(sim/cockpit2/switches/landing_lights_switch[0]:1)&&(sim/cockpit2/switches/landing_lights_switch[1]:1)
-sw_item:YAW DAMPER			|OFF:sim/cockpit/switches/yaw_damper_on:0
+sw_item:LANDING LIGHTS		|ON		:(sim/cockpit2/switches/landing_lights_switch[0]:1)&&(sim/cockpit2/switches/landing_lights_switch[1]:1)
+sw_item:YAW DAMPER			|OFF	:sim/cockpit/switches/yaw_damper_on:0
 sw_item:FLAPS (<148 KIAS)	|FULL	:sim/cockpit2/controls/flap_ratio:=1
 sw_item:APPROACH SPEED 100-120 KIAS
 sw_itemvoid:The airplane slows very quickly with power at idle. 
@@ -214,7 +214,9 @@ sw_item:FUEL VENT ICE PROT	|OFF	:(laminar/c90/iceRain/switch/fuelvent_deice_pos_
 sw_item:PITOT ICE PROT		|OFF	:(sim/cockpit/switches/pitot_heat_on:0)&&(sim/cockpit/switches/pitot_heat_on2:0)
 sw_item:STALL ICE PROT		|OFF	:sim/cockpit/switches/anti_ice_AOA_heat:0
 sw_item:RECOG LIGHTS		|OFF	:sim/cockpit2/switches/generic_lights_switch[2]:0
-sw_item:TRIMS				|SET
+sw_item:ELEVATOR TRIM		|3 UP	:sim/cockpit2/controls/elevator_trim:0.13|0.17
+sw_item:AILERON TRIM		|ZERO	:sim/cockpit2/controls/aileron_trim:-0.01|0.01
+sw_item:RUDDER TRIM			|ZERO	:sim/cockpit2/controls/rudder_trim:-0.01|0.01
 sw_item:FLAPS				|UP		:sim/cockpit2/controls/flap_ratio:=0
 sw_item:TRANSPONDER			|STBY	:sim/cockpit/radios/transponder_mode:=1
 sw_item:CONDITION LEVERS	|AS REQUIRED
@@ -240,3 +242,5 @@ sw_item:BOOST PUMPS			|OFF	:(sim/cockpit2/engine/actuators/fuel_pump_on[0]:0)&&(
 sw_item:BLEED AIR VALVES	|CLOSED	:sim/cockpit2/pressurization/actuators/bleed_air_mode:0
 sw_item:ENGINE ANTI-ICE		|OFF	:(sim/cockpit2/ice/anti_ice_engine_air[0]:=0)&&(sim/cockpit2/ice/anti_ice_engine_air[1]:=0)
 sw_item:BATTERY				|OFF	:sim/cockpit/electrical/battery_on:0
+sw_item:GENERATOR 1 		|OFF  	:laminar/c90/electrical/switch/gen2_switch_pos:-1
+sw_item:GENERATOR 2 		|OFF  	:laminar/c90/electrical/switch/gen2_switch_pos:-1
