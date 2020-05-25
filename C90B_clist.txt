@@ -203,7 +203,7 @@ sw_checklist:AFTER LANDING:AFTER LANDING
 sw_show:(sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot:<2)&&(sim/flightmodel/position/groundspeed:30:25)
 sw_item:AUTO IGNITION		|OFF	:(sim/cockpit2/engine/actuators/auto_ignite_on[0]:0)&&(sim/cockpit2/engine/actuators/auto_ignite_on[1]:0)
 sw_item:ENGINE ANTI-ICE		|ON		:(sim/cockpit2/ice/anti_ice_engine_air[0]:=1)&&(sim/cockpit2/ice/anti_ice_engine_air[1]:=1)
-sw_item:AUTOFEATHER			|ARMED	:sim/cockpit2/switches/prop_feather_mode:0
+sw_item:AUTOFEATHER		|OFF	:sim/cockpit2/switches/prop_feather_mode:0
 sw_item:PROP SYNC			|OFF	:sim/cockpit/switches/prop_sync_on:0
 sw_item:FUEL VENT ICE PROT	|OFF	:(laminar/c90/iceRain/switch/fuelvent_deice_pos_L:0)&&(laminar/c90/iceRain/switch/fuelvent_deice_pos_R:0)
 sw_item:PITOT ICE PROT		|OFF	:(sim/cockpit/switches/pitot_heat_on:0)&&(sim/cockpit/switches/pitot_heat_on2:0)
